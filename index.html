@@ -1,0 +1,11 @@
+// This tells the homepage to listen to your browser's WebNowPlaying data
+const socket = new WebSocket('ws://127.0.0.1:8974');
+
+socket.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    
+    // Updates your homepage text fields with your real music info
+    document.getElementById('track-title').innerText = data.title;
+    document.getElementById('track-artist').innerText = data.artist;
+    document.getElementById('album-art').src = data.coverUrl;
+};
